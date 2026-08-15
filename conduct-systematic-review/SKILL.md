@@ -1,5 +1,5 @@
 ---
-name: litreview
+name: conduct-systematic-review
 description: >
   Literature review for academic and R&D research: search strategy, source
   assessment, synthesis, and citation management. Use when conducting a
@@ -60,7 +60,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 3. Execute searches; capture results.
 
 ```bash
-python3 litreview/scripts/search_strategy_builder.py \
+python3 conduct-systematic-review/scripts/search_strategy_builder.py \
   --input question.json --format markdown
 ```
 
@@ -72,7 +72,7 @@ python3 litreview/scripts/search_strategy_builder.py \
 3. Triage: include / exclude / read-in-full.
 
 ```bash
-python3 litreview/scripts/source_quality_scorer.py \
+python3 conduct-systematic-review/scripts/source_quality_scorer.py \
   --input sources.json --format markdown
 ```
 
@@ -83,7 +83,7 @@ python3 litreview/scripts/source_quality_scorer.py \
    surface evidence strength, identify gaps.
 
 ```bash
-python3 litreview/scripts/thematic_synthesis_builder.py \
+python3 conduct-systematic-review/scripts/thematic_synthesis_builder.py \
   --input tagged_sources.json --format markdown
 ```
 

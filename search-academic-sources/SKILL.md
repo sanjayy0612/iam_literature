@@ -1,5 +1,5 @@
 ---
-name: literature-review
+name: search-academic-sources
 version: 1.2.0
 description: Assistance with writing literature reviews by searching for academic sources via Semantic Scholar, OpenAlex, Crossref and PubMed APIs. Use when the user needs to find papers on a topic, get details for specific DOIs, or draft sections of a literature review with proper citations.
 ---

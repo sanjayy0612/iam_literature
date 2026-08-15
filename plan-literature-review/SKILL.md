@@ -1,5 +1,5 @@
 ---
-name: literature-review
+name: plan-literature-review
 description: Use when "literature review", "research synthesis", "systematic review", "academic search", or asking about "find papers", "cite sources", "research gaps", "meta-analysis", "bibliography"
 version: 1.0.0
 ---
