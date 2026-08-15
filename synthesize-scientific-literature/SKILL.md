@@ -36,7 +36,7 @@ Separate reported results from interpretation. Mark fields unavailable from the 
 Use `scripts/search_databases.py` to normalize and deduplicate compatible JSON exports:
 
 ```bash
-python3 scripts/search_databases.py results.json --deduplicate --output unique_results.json
+python3 scripts/search_databases.py results.json --deduplicate --format json --output unique_results.json
 ```
 
 ## Choose the synthesis method

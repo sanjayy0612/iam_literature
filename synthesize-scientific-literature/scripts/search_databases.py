@@ -105,6 +105,8 @@ def metadata_fingerprint(result: Dict) -> str:
         first_author = authors[0] if authors else ''
     else:
         first_author = str(authors).split(',')[0]
+    if isinstance(first_author, dict):
+        first_author = first_author.get('name') or first_author.get('family') or ''
     return '|'.join((title, year, normalize_text(first_author)))
 
 
@@ -119,7 +121,7 @@ def deduplicate_results(results: List[Dict]) -> List[Dict]:
         Deduplicated list
     """
     seen_dois = set()
-    seen_fingerprints = set()
+    seen_fingerprints: Dict[str, List[int]] = {}
     unique_results = []
 
     for result in results:
@@ -130,16 +132,29 @@ def deduplicate_results(results: List[Dict]) -> List[Dict]:
         if doi and doi in seen_dois:
             continue
 
-        # Use normalized metadata as a fallback, including records whose DOI
-        # is missing from one source but present in another.
-        if fingerprint and fingerprint in seen_fingerprints:
+        # Use normalized metadata as a fallback for records whose DOI is
+        # missing from one source but present in another. A fingerprint alone
+        # must not collapse records with different non-empty DOIs.
+        matching_indices = seen_fingerprints.get(fingerprint, []) if fingerprint else []
+        duplicate = False
+        for index in matching_indices:
+            existing_doi = normalize_doi(unique_results[index].get('doi'))
+            if not doi:
+                duplicate = True
+                break
+            if doi and not existing_doi:
+                unique_results[index] = result
+                seen_dois.add(doi)
+                duplicate = True
+                break
+        if duplicate:
             continue
 
         # Add to results
         if doi:
             seen_dois.add(doi)
         if fingerprint:
-            seen_fingerprints.add(fingerprint)
+            seen_fingerprints.setdefault(fingerprint, []).append(len(unique_results))
 
         unique_results.append(result)
 
