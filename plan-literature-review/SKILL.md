@@ -1,159 +1,92 @@
 ---
 name: plan-literature-review
-description: Use when "literature review", "research synthesis", "systematic review", "academic search", or asking about "find papers", "cite sources", "research gaps", "meta-analysis", "bibliography"
-version: 1.0.0
+description: Plan a narrative, scoping, rapid, or systematic literature review before searching begins. Use when defining a research question, selecting a review type, developing concepts and search terms, choosing information sources, setting eligibility criteria, designing screening and extraction procedures, or writing a reproducible review protocol.
 ---
 
-<!-- Adapted from: claude-scientific-skills/scientific-skills/literature-review -->
+# Plan a Literature Review
 
-# Literature Review Guide
+Create a decision-ready protocol before retrieving studies. Keep the plan proportional to the user's purpose; do not impose systematic-review overhead on an exploratory narrative review.
 
-Conduct comprehensive, systematic literature reviews using academic databases.
+## Clarify the decision
 
-## When to Use
+Determine:
 
-- Conducting systematic literature reviews
-- Synthesizing research on a topic
-- Writing literature review sections
-- Identifying research gaps
-- Building bibliographies
+- The question the review must answer
+- The intended audience and deliverable
+- The review type: narrative, scoping, rapid, systematic, or meta-analysis
+- Dates, languages, populations, contexts, methods, and publication types
+- Available reviewers, databases, time, and access constraints
 
-## Core Workflow
+Ask only the two or three questions that would materially change the protocol. If the user asks to proceed immediately, state assumptions explicitly.
 
-### Phase 1: Planning
+## Frame the question
 
-1. **Define Research Question** (PICO framework for clinical)
-   - Population, Intervention, Comparison, Outcome
+Choose a suitable framework rather than defaulting to PICO:
 
-2. **Establish Scope**
-   - Review type: narrative, systematic, scoping
-   - Time period, geographic scope
-   - Study types to include
+- **PICO** for intervention or comparative-effect questions
+- **PEO** for exposure, experience, or association questions
+- **SPIDER** for qualitative or mixed-methods questions
+- **PCC** for scoping reviews
+- A concept map for exploratory or interdisciplinary reviews
 
-3. **Develop Search Strategy**
-   - Key terms and synonyms
-   - Boolean operators (AND, OR, NOT)
-   - Database-specific syntax
+Translate the question into two to four concepts. For each concept, list synonyms, abbreviations, spelling variants, controlled vocabulary, and excluded near-matches.
 
-### Phase 2: Searching
+## Design the search
 
-**Key Databases:**
+Specify:
 
-| Database | Coverage |
-|----------|----------|
-| PubMed | Biomedical, life sciences |
-| arXiv | Physics, CS, math preprints |
-| Semantic Scholar | Broad academic |
-| Google Scholar | Broad coverage |
-| Web of Science | Multidisciplinary |
+1. Databases and repositories appropriate to the discipline
+2. A complete query for each source, including source-specific syntax
+3. Date, language, document-type, and subject filters
+4. Citation chasing and gray-literature procedures when relevant
+5. The search date and a plan for updating the search
+6. How records will be exported, normalized, and deduplicated
 
-**Search Strategy Template:**
+Treat a single general-purpose search engine as discovery support, not a reproducible systematic search.
 
-```
-(term1 OR synonym1) AND (term2 OR synonym2) AND (term3)
-```
+## Define eligibility before screening
 
-### Phase 3: Screening
+Write operational inclusion and exclusion criteria for:
 
-1. **Title/Abstract Screening**
-   - Apply inclusion/exclusion criteria
-   - Track reasons for exclusion
+- Population, phenomenon, intervention, comparator, and outcomes
+- Study design and evidence type
+- Context, geography, timeframe, and language
+- Publication status and minimum reporting requirements
 
-2. **Full-Text Review**
-   - Assess eligibility
-   - Extract key data
+Avoid criteria that require subjective judgment without a decision rule.
 
-### Phase 4: Synthesis
+## Plan selection and extraction
 
-**Organize Thematically:**
+Define:
 
-```markdown
-## Theme 1: [Topic]
-- Finding A (Author, Year)
-- Finding B (Author, Year)
-- Synthesis and gaps
+- Title/abstract and full-text screening stages
+- Reviewer count, conflict resolution, and calibration procedure
+- Exclusion-reason categories
+- Data fields to extract from every included source
+- Study-level quality or risk-of-bias assessment
+- Synthesis method and conditions for quantitative pooling
 
-## Theme 2: [Topic]
-...
-```
+Do not promise independent dual screening when only one reviewer or agent is available. Report that limitation instead.
 
-**Comparison Table:**
+## Produce the protocol
 
-| Study | Methods | Sample | Key Findings |
-|-------|---------|--------|--------------|
-| Author 2023 | RCT | n=100 | Finding X |
-| Author 2022 | Cohort | n=500 | Finding Y |
+Return:
 
-### Phase 5: Writing
+1. Review objective and question
+2. Review type and justification
+3. Eligibility criteria table
+4. Information sources and reproducible queries
+5. Screening, deduplication, and extraction procedures
+6. Quality-assessment approach
+7. Planned synthesis
+8. Reporting or registration plan when applicable
+9. Known constraints and likely biases
 
-**Structure:**
+Use `search-academic-sources` to execute supported API searches, `conduct-systematic-review` to manage the full review, and `synthesize-scientific-literature` after studies have been selected.
 
-1. Introduction (scope, objectives)
-2. Methods (search strategy, criteria)
-3. Results (thematic synthesis)
-4. Discussion (gaps, future directions)
-5. Conclusion
+## Guardrails
 
-## Citation Management
-
-### Citation Styles
-
-```markdown
-**APA 7:**
-Author, A. A., & Author, B. B. (Year). Title. Journal, Volume(Issue), pages. https://doi.org/xxx
-
-**Nature:**
-Author, A. A. & Author, B. B. Title. Journal Volume, pages (Year).
-
-**Vancouver:**
-Author AA, Author BB. Title. Journal. Year;Volume(Issue):pages.
-```
-
-### Tools
-
-- Zotero (free, open source)
-- Mendeley (free)
-- EndNote (institutional)
-
-## Quality Assessment
-
-**For RCTs:** Cochrane Risk of Bias tool
-**For Observational:** Newcastle-Ottawa Scale
-**For Qualitative:** CASP checklist
-
-## PRISMA Flow Diagram
-
-```
-Records identified (n=X)
-    ↓
-Duplicates removed (n=X)
-    ↓
-Records screened (n=X)
-    ↓
-Records excluded (n=X)
-    ↓
-Full-text assessed (n=X)
-    ↓
-Studies included (n=X)
-```
-
-## Best Practices
-
-1. **Document everything** - reproducibility
-2. **Use multiple databases** - comprehensive coverage
-3. **Two reviewers** - reduce bias (when possible)
-4. **Pre-register protocol** - transparency
-5. **Update searches** - before publication
-
-## Common Pitfalls
-
-- Publication bias (positive results overrepresented)
-- Language bias (English-only searches)
-- Citation bias (citing famous papers)
-- Not updating searches before submission
-
-## Resources
-
-- PRISMA Guidelines: <http://prisma-statement.org/>
-- Cochrane Handbook: <https://training.cochrane.org/handbook>
-- PROSPERO (protocol registration): <https://www.crd.york.ac.uk/prospero/>
+- Do not invent database coverage, result counts, registration identifiers, or reviewer participation.
+- Do not write eligibility criteria after examining outcomes unless the change is documented as an amendment.
+- Separate a review protocol from the eventual findings.
+- Mark preprints, retractions, corrections, and inaccessible full text clearly.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Search Academic Sources"
+  short_description: "Search and deduplicate scholarly API records"
+  default_prompt: "Use $search-academic-sources to find and verify academic records for this topic."

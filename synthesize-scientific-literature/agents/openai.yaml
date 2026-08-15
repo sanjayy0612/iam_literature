@@ -1,0 +1,4 @@
+interface:
+  display_name: "Synthesize Scientific Literature"
+  short_description: "Build a traceable synthesis from selected studies"
+  default_prompt: "Use $synthesize-scientific-literature to create a claim-linked synthesis of these studies."

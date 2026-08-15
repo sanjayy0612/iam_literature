@@ -1,46 +1,85 @@
-# Research Skills Collection
+# Portable Research Skills
 
-This repository contains a curated set of research-oriented skills for literature review, evidence synthesis, and research-gap analysis. Each folder is a local copy of a community skill definition collected for review, comparison, and selective installation in Codex or Copilot workflows.
+Six agent-neutral skills for planning, discovering, reviewing, synthesizing, and auditing scientific literature. The shared `SKILL.md` files avoid vendor-specific tool names and work as portable instruction bundles for agents that support the Agent Skills directory pattern.
 
-## Included skills
+Codex-specific UI metadata lives in each optional `agents/openai.yaml`; it does not alter the shared workflow.
 
-- `analyze-research-gaps` — identifies under-covered topics and recommends where additional literature is needed.
-- `conduct-systematic-review` — systematic literature-review workflow with search strategy, screening, quality assessment, and synthesis.
-- `synthesize-scientific-literature` — database-oriented review process with citation verification and document generation.
-- `plan-literature-review` — concise review guide for planning, searching, and synthesizing academic evidence.
-- `search-academic-sources` — multi-source literature discovery using Semantic Scholar, OpenAlex, Crossref, and PubMed.
-- `identify-literature-gaps` — recovered marketplace rendering of a literature-gap skill for reference and archival use.
+## Skills
 
-## When to use each skill
-
-| Goal | Recommended skill |
+| Skill | Use it for |
 |---|---|
-| Identify missing coverage in a research field | `analyze-research-gaps` |
-| Build a rigorous review with explicit methods | `conduct-systematic-review` |
-| Search, verify citations, and generate review output | `synthesize-scientific-literature` |
-| Start with a compact literature-review workflow | `plan-literature-review` |
-| Find papers across multiple academic sources | `search-academic-sources` |
-| Reference a recovered gap-analysis description | `identify-literature-gaps` |
+| `plan-literature-review` | Design a review question, protocol, search strategy, eligibility criteria, and screening plan |
+| `search-academic-sources` | Query Semantic Scholar, OpenAlex, Crossref, and PubMed through a bundled Python utility |
+| `conduct-systematic-review` | Run an auditable systematic, scoping, or rapid review from protocol through reporting |
+| `synthesize-scientific-literature` | Build a claim-linked synthesis and verified review document from selected studies |
+| `identify-literature-gaps` | Derive candidate gaps from an existing bounded review or evidence summary |
+| `analyze-research-gaps` | Test and prioritize gaps across a corpus, including searches for counterexamples |
 
-## How to use this repository
+## Recommended workflow
 
-1. Review the `SKILL.md` file for the skill you want to use.
-2. Copy only the relevant folder into your local skills directory.
-3. Restart Codex or Copilot so the skill is recognized.
-4. Use the skill that matches your research task rather than installing the entire collection blindly.
+```text
+plan-literature-review
+        ↓
+search-academic-sources
+        ↓
+conduct-systematic-review
+        ↓
+synthesize-scientific-literature
+        ↓
+identify-literature-gaps
+```
 
-This repo is intended as a reviewable archive and a selection tool, not as a single runtime package.
+Use `analyze-research-gaps` when the main task is a deeper coverage audit rather than the final step of one review.
+
+## Install selectively
+
+Review a skill and its scripts before installing it. Copy only the folders you need.
+
+For a personal Codex installation:
+
+```bash
+cp -R plan-literature-review ~/.codex/skills/
+```
+
+For Claude Code or another compatible agent, copy the folder into that product's documented personal or project skills directory. Installation locations and supported metadata vary by agent version; the portable contract is the skill folder and its `SKILL.md`.
+
+After installation, restart or reload the agent if it does not discover the skill immediately.
+
+## Dependencies
+
+- All instruction-only skills can operate with the host agent's available file, browsing, and document tools.
+- `search-academic-sources/scripts/lit_search.py` requires Python 3, `requests`, network access, and access to the selected scholarly APIs.
+- `conduct-systematic-review` bundles Python 3 utilities that use only the standard library.
+- `synthesize-scientific-literature/scripts/verify_citations.py` requires `requests` and network access.
+- PDF generation additionally requires the converters documented by `scripts/generate_pdf.py`.
+
+Never store API keys in this repository. Use environment variables described by the relevant skill.
+
+## Validation
+
+Every skill keeps its shared YAML frontmatter to `name` and `description`, uses a matching folder name, and stays below 500 lines. Bundled Python files are syntax-checked before release. Platform-specific metadata is optional and isolated from the shared instructions.
 
 ## Provenance
 
-| Folder | Source | Pinned version |
+This collection began as reviewed copies of third-party community skills and has since been rewritten for portability, clearer boundaries, and stronger evidence guardrails.
+
+| Current folder | Upstream source | Pinned version |
 |---|---|---|
 | `conduct-systematic-review` | `borghei/Claude-Skills`, `research/litreview` | `ddca910e95580c63a236303fc1534054f0f14d4c` |
-| `synthesize-scientific-literature` | `davila7/claude-code-templates`, `cli-tool/components/skills/scientific/literature-review` | `5ee4e51edbbc0bc4355f023e497d9efc1d6cc93d` |
-| `analyze-research-gaps` | `jmagly/aiwg`, `agentic/code/frameworks/research-complete/skills/research-gap` | `f33d13476b9567299374d269b653dd56f444744c` |
-| `plan-literature-review` | `eyadsibai/ltk`, `plugins/ltk-product/skills/literature-review` | `f8e85697b95d8e4968cff3c49d20e632048faae9` |
+| `synthesize-scientific-literature` | `davila7/claude-code-templates`, `scientific/literature-review` | `5ee4e51edbbc0bc4355f023e497d9efc1d6cc93d` |
+| `analyze-research-gaps` | `jmagly/aiwg`, `research-gap` | `f33d13476b9567299374d269b653dd56f444744c` |
+| `plan-literature-review` | `eyadsibai/ltk`, `literature-review` | `f8e85697b95d8e4968cff3c49d20e632048faae9` |
 | `search-academic-sources` | LobeHub package `openclaw-skills-literature-review` | `1.2.0` |
+| `identify-literature-gaps` | MCP Market rendered instructions; advertised GitHub source unavailable | Marketplace transcription |
 
-## Notes
+Review upstream licensing before redistribution or commercial use. In particular, the original Borghei package declared `MIT + Commons Clause`; this repository does not replace upstream license terms.
 
-These skills are useful for systematic research work, literature synthesis, and evidence mapping. They should be reviewed before installation and adapted to your project context as needed.
+## Evidence safeguards
+
+Across the collection:
+
+- Metadata and abstracts are not represented as full-text evidence.
+- “Not found” is distinguished from “no research exists.”
+- DOI resolution verifies identity, not the truth of a claim.
+- Preprints, peer-reviewed work, corrections, and retractions remain distinguishable.
+- Search counts, reviewer participation, quality ratings, and citations must never be invented.

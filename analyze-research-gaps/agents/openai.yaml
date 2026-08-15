@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analyze Research Gaps"
+  short_description: "Test and prioritize defensible evidence gaps"
+  default_prompt: "Use $analyze-research-gaps to test and prioritize defensible gaps in this research evidence."
