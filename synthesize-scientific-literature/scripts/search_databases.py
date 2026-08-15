@@ -5,6 +5,7 @@ Searches multiple literature databases and aggregates results.
 """
 
 import json
+import re
 import sys
 from typing import Dict, List
 from datetime import datetime
@@ -80,6 +81,33 @@ def format_search_results(results: List[Dict], output_format: str = 'json') -> s
     else:
         raise ValueError(f"Unknown format: {output_format}")
 
+def normalize_doi(value: object) -> str:
+    """Return a canonical DOI string without resolver or ``doi:`` prefixes."""
+    doi = str(value or '').strip().lower()
+    doi = re.sub(r'^https?://(?:dx\.)?doi\.org/', '', doi)
+    doi = re.sub(r'^doi:\s*', '', doi)
+    return doi.rstrip('.,;')
+
+
+def normalize_text(value: object) -> str:
+    """Normalize text for conservative metadata fingerprints."""
+    return ' '.join(re.findall(r'[a-z0-9]+', str(value or '').lower()))
+
+
+def metadata_fingerprint(result: Dict) -> str:
+    """Build a title/year/first-author fallback key when a DOI is unavailable."""
+    title = normalize_text(result.get('title'))
+    if not title:
+        return ''
+    year = str(result.get('year') or '').strip()
+    authors = result.get('authors') or result.get('author') or []
+    if isinstance(authors, list):
+        first_author = authors[0] if authors else ''
+    else:
+        first_author = str(authors).split(',')[0]
+    return '|'.join((title, year, normalize_text(first_author)))
+
+
 def deduplicate_results(results: List[Dict]) -> List[Dict]:
     """
     Remove duplicate results based on DOI or title.
@@ -91,26 +119,27 @@ def deduplicate_results(results: List[Dict]) -> List[Dict]:
         Deduplicated list
     """
     seen_dois = set()
-    seen_titles = set()
+    seen_fingerprints = set()
     unique_results = []
 
     for result in results:
-        doi = result.get('doi', '').lower().strip()
-        title = result.get('title', '').lower().strip()
+        doi = normalize_doi(result.get('doi'))
+        fingerprint = metadata_fingerprint(result)
 
         # Check DOI first (more reliable)
         if doi and doi in seen_dois:
             continue
 
-        # Check title as fallback
-        if not doi and title in seen_titles:
+        # Use normalized metadata as a fallback, including records whose DOI
+        # is missing from one source but present in another.
+        if fingerprint and fingerprint in seen_fingerprints:
             continue
 
         # Add to results
         if doi:
             seen_dois.add(doi)
-        if title:
-            seen_titles.add(title)
+        if fingerprint:
+            seen_fingerprints.add(fingerprint)
 
         unique_results.append(result)
 

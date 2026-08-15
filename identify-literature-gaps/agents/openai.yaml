@@ -1,0 +1,4 @@
+interface:
+  display_name: "Identify Literature Gaps"
+  short_description: "Turn review findings into testable research gaps"
+  default_prompt: "Use $identify-literature-gaps to derive and prioritize testable gaps from this literature review."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Literature Review"
+  short_description: "Design a rigorous, reproducible review protocol"
+  default_prompt: "Use $plan-literature-review to create a review protocol for this research question."

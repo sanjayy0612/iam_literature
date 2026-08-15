@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conduct Systematic Review"
+  short_description: "Run a transparent, reproducible evidence review"
+  default_prompt: "Use $conduct-systematic-review to conduct a reproducible review of this research question."

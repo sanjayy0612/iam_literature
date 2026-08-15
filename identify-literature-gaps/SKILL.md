@@ -1,68 +1,67 @@
 ---
 name: identify-literature-gaps
-description: "Identify research gaps from systematic literature reviews. Use when: (1) Completing literature reviews, (2) Justifying new studies, (3) Grant proposal development, (4) Dissertation planning, (5) Identifying future research directions."
-allowed-tools: Read, Grep
-version: 1.0.0
+description: Identify candidate knowledge, population, methodological, theoretical, evidence-quality, and implementation gaps from an existing literature review or evidence summary. Use when drafting a discussion or future-research section, justifying a study, refining a thesis or grant question, or converting documented review limitations into testable research opportunities.
 ---
 
-# Literature Gap Identification Skill
+# Identify Literature Gaps
 
-## Purpose
+Identify candidate gaps from an existing, bounded evidence synthesis. Use `analyze-research-gaps` instead when the task requires a new corpus-wide coverage analysis or independent searches to challenge each proposed gap.
 
-Systematically identify and prioritize research gaps from literature synthesis.
+## Confirm the evidence base
 
-## Types of Research Gaps
+Record the review question, included sources, search dates, databases, eligibility criteria, and known access limitations. If these are missing, label the result exploratory rather than definitive.
 
-### 1. Knowledge Gaps
+## Extract candidate gaps
 
-- Phenomenon not studied
-- Understudied populations
-- Unexplored contexts
+Look for:
 
-### 2. Methodological Gaps
+- **Knowledge gaps** — unanswered relationships or phenomena
+- **Population and context gaps** — missing groups, regions, settings, or conditions
+- **Methodological gaps** — weak designs, missing comparators, short follow-up, or unvalidated measures
+- **Theoretical gaps** — untested mechanisms, mediators, moderators, or competing explanations
+- **Evidence-quality gaps** — imprecision, bias, inconsistency, indirectness, or poor reproducibility
+- **Implementation gaps** — limited safety, feasibility, cost, adoption, or scalability evidence
 
-- Lack of rigorous designs (e.g., RCTs)
-- Limited longitudinal studies
-- Need for mixed methods
+Treat author-proposed future work as a lead, not proof of a field-level gap.
 
-### 3. Theoretical Gaps
+## Test each candidate
 
-- Competing theories untested
-- Mechanisms not understood
-- Mediators/moderators unexplored
+For every gap:
 
-### 4. Practice Gaps
+1. State what is missing or inadequate.
+2. Cite the evidence establishing current coverage.
+3. Note counterexamples and near-matches.
+4. Distinguish absence, scarcity, inconsistency, and low quality.
+5. Explain why the gap matters.
+6. Convert it into an answerable question or study objective.
+7. Assign confidence based on the review's coverage.
 
-- Interventions not tested
-- Implementation not studied
-- Scalability unknown
+Use wording such as “few eligible studies were identified within this review scope.” Avoid absolute claims unless the search was demonstrably comprehensive.
 
-### 5. Evidence Quality Gaps
+## Prioritize
 
-- High risk of bias
-- Small sample sizes
-- Inconsistent results
+Rank candidates by:
 
-## Gap Analysis Process
+- Importance to theory, practice, policy, or safety
+- Confidence that the gap is real
+- Potential contribution
+- Feasibility and ethics
+- Risk of duplicating recent or ongoing work
 
-1. **Synthesize Findings** — Summarize what is known across the literature.
-2. **Identify Limitations** — Extract limitations reported by authors and reviewers.
-3. **Find Patterns** — Look for recurring omissions, contradictions, and neglected contexts.
-4. **Prioritize** — Rank gaps by importance, feasibility, and potential impact.
-5. **Justify** — Connect the selected gap directly to the proposed research question.
+Keep novelty separate from importance.
 
-## Example
+## Output
 
-For a review of mindfulness interventions for anxiety:
+Return a table containing:
 
-- Few studies include adolescent populations.
-- Active-control comparisons are limited.
-- Long-term outcomes are rarely measured.
-- Mechanisms of change remain unclear.
-- Implementation in routine care is understudied.
+| Gap claim | Type | Supporting evidence | Counterevidence | Confidence | Why it matters | Next research question |
+|---|---|---|---|---|---|---|
 
-**Prioritized gap:** Test mindfulness interventions in adolescent populations using active controls and longer follow-up periods.
+Follow it with the search limitations and two or three concrete searches that could falsify the highest-priority gap.
 
-## Version
+## Guardrails
 
-1.0.0
+- Do not infer a gap from a single paper's limitations section.
+- Do not equate low citation counts with weak evidence.
+- Do not invent citations, study counts, or evidence-quality ratings.
+- Distinguish “not studied,” “not found,” “not accessible,” and “not adequately studied.”
