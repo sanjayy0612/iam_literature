@@ -31,17 +31,47 @@ identify-literature-gaps
 
 Use `analyze-research-gaps` when the main task is a deeper coverage audit rather than the final step of one review.
 
-## Install selectively
+## Installation
 
-Review a skill and its scripts before installing it. Copy only the folders you need.
+Review each skill and its bundled scripts before installing it. Install only the folders you need.
 
-For a personal Codex installation:
+### Install directly from GitHub in Codex
+
+Codex includes a helper for installing one or more skill directories from a GitHub repository:
 
 ```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo sanjayy0612/iam_literature \
+  --path \
+    plan-literature-review \
+    search-academic-sources \
+    conduct-systematic-review \
+    synthesize-scientific-literature \
+    identify-literature-gaps \
+    analyze-research-gaps
+```
+
+To install selectively, keep only the required paths. For example:
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo sanjayy0612/iam_literature \
+  --path plan-literature-review analyze-research-gaps
+```
+
+The installer stops if a destination directory already exists; remove or rename an existing installation only after preserving any local changes you need.
+
+### Install from a local clone
+
+```bash
+git clone https://github.com/sanjayy0612/iam_literature.git
+cd iam_literature
 cp -R plan-literature-review ~/.codex/skills/
 ```
 
-For Claude Code or another compatible agent, copy the folder into that product's documented personal or project skills directory. Installation locations and supported metadata vary by agent version; the portable contract is the skill folder and its `SKILL.md`.
+Repeat the final command for each additional skill you want to install.
+
+For Claude Code or another compatible agent, copy the selected skill folder into that product's documented personal or project skills directory. Installation locations and supported metadata vary by agent version; the portable contract is the skill folder and its `SKILL.md`.
 
 After installation, restart or reload the agent if it does not discover the skill immediately.
 
